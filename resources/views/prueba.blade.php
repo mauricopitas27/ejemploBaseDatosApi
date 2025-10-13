@@ -1,0 +1,1 @@
+hola desde mi archivo de prueba.blade.php 
