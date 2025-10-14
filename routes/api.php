@@ -5,10 +5,48 @@ use App\Models\Productos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
+use App\Models\empleado;
 
+Route::get('/empleados', function () {
+    return empleado::all();
+})->middleware('auth:sanctum');
+
+Route::get('/empleados/{id}', function (string $id) {
+    return empleado::find($id);
+});
+
+Route::post('/empleados/crear', function () {
+    empleado::create([
+        'nombre_completo' => request()->nombre_completo,
+        'departamento' => request()->departamento,
+        'antiguedad' => request()->antiguedad,
+        'nomina' => request()->nomina
+    ]);
+    return empleado::all();
+});
+
+Route::put('/empleados/actualizar', function () {
+    $empleado = empleado::findOrFail(request()->id);
+    $empleado->nombre_completo = request()->nombre_completo;
+    $empleado->departamento = request()->departamento;
+    $empleado->antiguedad = request()->antiguedad;
+    $empleado->nomina = request()->nomina;
+    $empleado->save();
+    return empleado::all();
+});
+
+Route::delete('/empleados/eliminar', function () {
+    $empleado = empleado::findOrFail(request()->id);
+    $empleado->delete();
+    return empleado::all();
+});
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+
+
+
+
 
 Route::get('/productos', function () {
     return Productos::all();

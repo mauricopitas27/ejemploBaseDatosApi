@@ -32,9 +32,10 @@ Route::get('/productos/editar/{id}',[ProductosController::class, 'edit'])
       Route::put('/productos/actualizar/{id}',[ProductosController::class, 'update'])
         ->name('productos.update');
 
-Route::get('/productos/eliminar/{id}',[ProductosController::class, 'sdestroy'])
-      ->name('productos.destroy');
-
+Route::delete('/productos/eliminar', 
+      [ProductosController::class, 'destroy'])
+        ->name('productos.destroy');      
+        
 Route::get('/productos/{id}', function (string $id) {
     return productos::find($id);
 });
