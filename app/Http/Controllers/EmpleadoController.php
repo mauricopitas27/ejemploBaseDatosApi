@@ -12,8 +12,7 @@ class EmpleadoController extends Controller
      */
     public function index()
     {
-         $empleado = empleado::all();
-        return view('empleado.index', compact('empleado'));
+        return Empleado::all();
     }
 
     /**
@@ -30,8 +29,14 @@ class EmpleadoController extends Controller
     public function store(Request $request)
     {
         
-        empleado::create($request->all());
-        return redirect()->route('empleado.index');
+        empleado::create([
+            'nombre_completo' => $request->nombre_completo,
+            'departamento' => $request->departamento,
+            'antiguedad' => $request->antiguedad,
+            'nomina' => $request->nomina
+        ]);
+        return empleado::all();
+        
     }
 
     /**
@@ -39,7 +44,7 @@ class EmpleadoController extends Controller
      */
     public function show(empleado $empleado)
     {
-        //
+        return $empleado;
     }
 
     /**
@@ -47,8 +52,7 @@ class EmpleadoController extends Controller
      */
     public function edit(empleado $empleado)
     {
-        $empleado = empleado::find($id);
-        return view ('empleado.editar', compact('empleado'));
+       //
     }
 
     /**
@@ -56,7 +60,12 @@ class EmpleadoController extends Controller
      */
     public function update(Request $request, empleado $empleado)
     {
-        //
+        $empleado->nombre_completo = $request->nombre_completo;
+        $empleado->departamento = $request->departamento;
+        $empleado->antiguedad = $request->antiguedad;
+        $empleado->nomina = $request->nomina;
+        $empleado->save();
+        return empleado::all();
     }
 
     /**
@@ -64,6 +73,8 @@ class EmpleadoController extends Controller
      */
     public function destroy(empleado $empleado)
     {
-        //
+         $empleado->delete();
+            return empleado::all();
+    
     }
 }

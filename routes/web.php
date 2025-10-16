@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Productos;
 use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\MatriculaController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -43,3 +44,6 @@ Route::get('/productos/{id}', function (string $id) {
 Route::get('/productos/nombre/{descripcion}', function (string $descripcion) {
     return productos::where("descripcion","like","%".$descripcion."%")->get();
 });
+
+Route::get('/matriculas',[MatriculaController::class, 'index'])
+      ->name('matriculas.index');
