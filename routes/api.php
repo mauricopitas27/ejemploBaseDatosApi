@@ -5,7 +5,10 @@ use App\Models\Productos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
-use App\Models\empleado;
+use App\Http\Controllers\API\EmpleadoController;
+use App\Http\Controllers\ClienteController;
+use App\Models\Empleado;
+
 
 Route::get('/empleados', function () {
     return empleado::all();
@@ -114,3 +117,17 @@ Route::delete('/productos/eliminar', function(){
 Route::post('/usuario/registrar', [AuthController::class, 'register']);
 
 Route::post('/usuario/login', [AuthController::class, 'login']);
+
+//api empleados
+Route::get("/empleados", [EmpleadoController::class, 'index']);
+Route::post("/empleados", [EmpleadoController::class, 'store'])->middleware('auth:sanctum');
+Route::get("/empleados/mostrar/{empleado}", [EmpleadoController::class, 'show']);
+Route::put("/empleados/actualizar/{empleado}", [EmpleadoController::class, 'update'])->middleware('auth:sanctum');
+Route::delete("/empleados/eliminar/{empleado}", [EmpleadoController::class, 'destroy'])->middleware('auth:sanctum');
+
+//api cliente
+Route::get("/clientes", [ClienteController::class, 'index']);
+Route::post('/clientes/crear', [ClienteController::class, 'store']);
+Route::get("/clientes/mostrar/{cliente}", [ClienteController::class, 'show']);
+Route::put("/clientes/actualizar/{cliente}", [ClienteController::class, 'update']);
+Route::delete("/clientes/eliminar/{cliente}", [ClienteController::class, 'destroy']);

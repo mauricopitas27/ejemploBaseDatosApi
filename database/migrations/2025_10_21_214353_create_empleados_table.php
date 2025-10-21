@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('telefonos', function (Blueprint $table) {
+        Schema::create('empleados', function (Blueprint $table) {
             $table->id();
-            $table->string('numero',15);
-            $table->unsignedBigInteger('alumno_id');
-            $table->string('tipo',20); // Ejemplo: 'móvil', 'fijo', etc.
+            $table->string('nombre_completo');
+            $table->string('departamento');
+            $table->integer('antiguedad');
+            $table->decimal('nomina', 10, 2);
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('telefonos');
+        Schema::dropIfExists('empleados');
     }
 };

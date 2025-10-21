@@ -12,7 +12,8 @@ class TelefonoController extends Controller
      */
     public function index()
     {
-        //
+        $telefonos = telefono::all();
+        return view('telefonos.index', compact('telefonos'));
     }
 
     /**

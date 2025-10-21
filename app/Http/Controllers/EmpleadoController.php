@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\empleado;
+use App\Models\Empleado;
 use Illuminate\Http\Request;
 
 class EmpleadoController extends Controller
@@ -20,7 +20,7 @@ class EmpleadoController extends Controller
      */
     public function create()
     {
-        return view ('empleado.crear');
+        return view('empleados.create');
     }
 
     /**
@@ -28,21 +28,19 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-        
-        empleado::create([
-            'nombre_completo' => $request->nombre_completo,
-            'departamento' => $request->departamento,
-            'antiguedad' => $request->antiguedad,
-            'nomina' => $request->nomina
+        Empleado::create([
+            'nombre_completo' => $request->input('nombre_completo'),
+            'departamento' => $request->input('departamento'),
+            'antiguedad' => $request->input('antiguedad'),
+            'nomina' => $request->input('nomina')
         ]);
-        return empleado::all();
-        
+        return Empleado::all();
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(empleado $empleado)
+    public function show(Empleado $empleado)
     {
         return $empleado;
     }
@@ -50,31 +48,30 @@ class EmpleadoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(empleado $empleado)
+    public function edit(Empleado $empleado)
     {
-       //
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, empleado $empleado)
+    public function update(Request $request, Empleado $empleado)
     {
-        $empleado->nombre_completo = $request->nombre_completo;
-        $empleado->departamento = $request->departamento;
-        $empleado->antiguedad = $request->antiguedad;
-        $empleado->nomina = $request->nomina;
+        $empleado->nombre_completo = $request->input('nombre_completo');
+        $empleado->departamento = $request->input('departamento');
+        $empleado->antiguedad = $request->input('antiguedad');
+        $empleado->nomina = $request->input('nomina');
         $empleado->save();
-        return empleado::all();
+        return Empleado::all();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(empleado $empleado)
+    public function destroy(Empleado $empleado)
     {
-         $empleado->delete();
-            return empleado::all();
-    
+        $empleado->delete();
+        return Empleado::all();
     }
 }
