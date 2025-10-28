@@ -12,7 +12,9 @@ class ClasesController extends Controller
      */
     public function index()
     {
-        //
+        $materias = clases::all();
+        return view('materias.index', compact('materias'));
+
     }
 
     /**

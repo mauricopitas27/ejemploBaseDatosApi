@@ -16,6 +16,23 @@ class AlumnoController extends Controller
         return view('alumnos.index', compact('alumnos'));
     }
 
+
+
+    
+    public function indexTelefonos()
+    {
+     $alumnos = Alumno::all();
+        return view('alumnos.indexTelefonos', compact('alumnos'));
+
+    }
+
+    public function indexMaterias()
+    {
+     $alumnos = Alumno::all();
+        return view('alumnos.indexMaterias', compact('alumnos'));
+
+    }
+
     /**
      * Show the form for creating a new resource.
      */
