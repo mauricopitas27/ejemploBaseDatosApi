@@ -8,6 +8,10 @@ use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\EmpleadoController;
 use App\Http\Controllers\ClienteController;
 use App\Models\Empleado;
+use App\Models\Alumno;
+use App\Http\Controllers\comportamientoController;
+use App\Http\Controllers\Api\MensajeController;
+
 
 
 Route::get('/empleados', function () {
@@ -131,3 +135,17 @@ Route::post('/clientes/crear', [ClienteController::class, 'store']);
 Route::get("/clientes/mostrar/{cliente}", [ClienteController::class, 'show']);
 Route::put("/clientes/actualizar/{cliente}", [ClienteController::class, 'update']);
 Route::delete("/clientes/eliminar/{cliente}", [ClienteController::class, 'destroy']);
+
+
+Route::get('/alumnos', function () {
+    return Alumno::all();
+});
+
+Route::post('/comportamiento',[comportamientoController::class,'store']);
+
+
+
+Route::post('/practica12/crear', [TuControlador::class, 'crearMensaje']);
+// Para práctica 13 (GET)
+Route::get('/practica13', [TuControlador::class, 'obtenerMensajes']);
+Route::post('/mensajes/crear', [MensajeController::class, 'store']);

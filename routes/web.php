@@ -8,6 +8,7 @@ use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\TelefonoController;
 use App\Http\Controllers\ClasesController;
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -69,4 +70,16 @@ Route::get('/alumnos/materias',[AlumnoController::class, 'indexMaterias'])
 
 Route::get('/materias',[MatriculaController::class, 'indexMaterias'])
       ->name('materias.index');
-      
+
+ Route::get('/vuebasico', function () {
+    return view('vuebasico');
+});
+      Route::get('/vuelista', function () {
+      return view('vuelistado');
+      });
+Route::get('/pagina', function () {
+      return view('landingpage.index');
+      });
+
+
+    
